@@ -43,10 +43,12 @@
     // Create main polygon series for countries
     // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
     var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_worldLow,
+      //Add any extra information here 
+      geoJSON: am5geodata_worldLow, //figure put how to put JS file worldLow.js data here
       exclude: ["AQ"]
+
     }));
-    
+
     polygonSeries.mapPolygons.template.setAll({
       //information with go next to tooltipText
       tooltipText: "{name}",
