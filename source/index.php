@@ -11,7 +11,8 @@
 </head>
 <body>
     
-    <div class="main-background-container">
+    <div class="main-background-container"></div>
+
     <div class="menu-bar">
             <div class="button-container">
                 <button class="home-button">Home</button>
@@ -32,11 +33,7 @@
     </div>
 
 
-    <div class="lower-background-container">
-        
-
-
-    </div>
+    <div class="lower-background-container"></div>
 
 
 
