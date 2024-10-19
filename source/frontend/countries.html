@@ -1,0 +1,171 @@
+<!--Credit--> 
+<!--https://www.amcharts.com/demos/zooming-to-countries-map/-->
+
+<!-- Styles -->
+<style>
+  #wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+</style>
+
+  <style>
+    #chartdiv {
+      width: 55%;
+      height: 700px;
+      top: 10vh;
+      left: 10vh;
+      float: left;
+    }
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+    <!--script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"</script-->
+    <script src="../backend/js/countrydata.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="//cdn.amcharts.com/lib/5/themes/Dark.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am5.ready(function() {
+    
+    // Create root element
+    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+    var root = am5.Root.new("chartdiv");
+    
+    
+    // Set themes
+    // https://www.amcharts.com/docs/v5/concepts/themes/
+    root.setThemes([
+      am5themes_Animated.new(root),
+      am5themes_Dark.new(root)
+    ]);
+    
+    
+    // Create the map chart
+    // https://www.amcharts.com/docs/v5/charts/map-chart/
+    var chart = root.container.children.push(
+      am5map.MapChart.new(root, {
+        rotationX: 60,
+        rotationY: -20,
+      panX: "rotateX",
+      panY: "rotateY",
+      wheelY: "rotateY",
+      wheelX: "rotateX",
+      wheelSensitivity: 8.0,
+      projection: am5map.geoOrthographic()
+    }));
+    
+    //chart.chartContainer.set("background", am5.Rectangle.new(root, {
+    //  fill: am5.color(0xebebeb),
+    //  stroke: am5.color(0xd4f1f9),
+    //  fillOpacity: 1
+    //}));
+    // Create main polygon series for countries
+    // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+    var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+      //Add any extra information here 
+      geoJSON: window.am5geodata_worldLow, //figure put how to put JS file worldLow.js data here
+      exclude: ["AQ"]
+
+    }));
+
+    polygonSeries.mapPolygons.template.setAll({
+      //information with go next to tooltipText
+      tooltipText: "{name}",
+      fill: am5.color(0xb92637),
+      toggleKey: "active",
+      interactive: true
+    });
+    
+    polygonSeries.mapPolygons.template.states.create("hover", {
+      fill: am5.color(0xd44b06)
+    });
+    
+    polygonSeries.mapPolygons.template.states.create("active", {
+      fill: am5.color(0xFF8C42)
+    });
+    var backgroundSeries = chart.series.unshift(
+  am5map.MapPolygonSeries.new(root, {})
+);
+
+backgroundSeries.mapPolygons.template.setAll({
+  fill: am5.color(0xd4f1f9),
+  stroke: am5.color(0xd4f1f9),
+});
+
+backgroundSeries.data.push({
+  geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+}); 
+    var previousPolygon;
+    
+    polygonSeries.mapPolygons.template.on("active", function (active, target) {
+      if (previousPolygon && previousPolygon != target) {
+        previousPolygon.set("active", false);
+      }
+      if (target.get("active")) {
+        polygonSeries.zoomToDataItem(target.dataItem );
+      }
+      else {
+        chart.goHome();
+      }
+      previousPolygon = target;
+    });
+    
+    
+    // Add zoom control
+    // https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Zoom_control
+    var zoomControl = chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+    //zoomControl.homeButton.set("visible", True);
+    
+    // Set clicking on "water" to zoom out
+    chart.chartContainer.get("background").events.on("click", function () {
+      //chart.goHome();
+    })
+    
+    
+    // Make stuff animate on load
+    chart.appear(1000, 100);
+    
+    }); // end am5.ready()
+  </script>
+    
+<!-- HTML -->
+
+<!--Right Side DATA-->
+<style>
+      #datadiv {
+        width: 35%;
+        height: 500px;
+        margin-left: 60%;
+        white-space: normal;
+        inline-size: auto;
+        color: #ebebeb;
+      }
+        </style>
+        
+        <!-- Resources -->
+        <!--div>I'm on the right</div-->
+        <!-- Chart code -->
+        <script>
+        
+        // Set clicking on "water" to zoom out
+        //chart.chartContainer.get("background").events.on("click", function () {
+        //  chart.goHome();
+        // })
+        
+        
+        // Make stuff animate on load
+        //chart.appear(1000, 100);
+        
+        </script>
+        
+        <!-- HTML -->
+
+<div id="wrapper">
+    <div id="chartdiv"></div>
+    <div id="datadiv">Right Side</div>
+</div>

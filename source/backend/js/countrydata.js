@@ -258,5 +258,18 @@ const map = { "type": "FeatureCollection", "features": [
         { "type": "Feature", "geometry": { "type": "Polygon", "coordinates": [[[-61.7161, 17.0368], [-61.8597, 17.0133], [-61.8173, 17.1691], [-61.7161, 17.0368]]] }, "properties": { "name": "Antigua and Barbuda", "id": "AG" }, "id": "AG" },
         { "type": "Feature", "geometry": { "type": "Polygon", "coordinates": [[[-69.8992, 12.4518], [-69.9421, 12.4385], [-70.0661, 12.5468], [-69.9732, 12.5677], [-69.8992, 12.4518]]] }, "properties": { "name": "Aruba", "id": "AW" }, "id": "AW" }
     ] };
+
+    function update_fire_data(country_name, data)
+    {
+        const country = map.features.find(feature => feature.properties.name === country_name);
+        if (country) 
+        {
+            Object.assign(country.properties, `fire_data: ${data}`); // Update properties
+        } 
+        else 
+        {
+            console.log(`Feature not found for country: ${country_name}`);
+        }
+    }
 return map;
 })();
