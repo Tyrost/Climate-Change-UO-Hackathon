@@ -1,0 +1,66 @@
+
+.main-background-container {
+
+    color: black;
+
+}
+
+.menu-bar {
+    border: 0.1rem solid black;
+    display: inline-flex;
+    color: coral;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.main-title-container {
+    position: absolute;
+    left: 25%; 
+    top: 20vh;
+    transform: translateX(-50%); 
+    
+}
+
+.main-name {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#main-big-letters {
+    font-size: 80px;
+    margin: 0;
+}
+
+#main-smaller-letters {
+    font-size: 30px;
+    margin: 0;
+}
+
+#main-description-letters {
+
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: grey;
+    font-size: 18px;
+    margin: 0;
+
+}
+
+.main-image {
+
+    position: absolute;
+    max-width: 50%;
+    max-height: 50%;
+    top: 10vh;
+    right: 12%;
+
+
+}
