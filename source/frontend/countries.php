@@ -136,42 +136,73 @@ polygonSeries.mapPolygons.template.on("active", function (active, target) {
     chart.appear(1000, 100);
     
     }); // end am5.ready()
-  </script>
-
-<div id="wrapper">
-    <div id="chartdiv"></div>
-
-    
-    <div id="datadiv">Right Side</div>
-
-    <div id="countryName" style="font-size: 24px; text-align: center;">Click a country to see its name</div>
-
-</div>
-
-<div class="input-group" >
-    <form action="" method="post">
-        <div class="input-box">
-            <input type="text" name="country" required>
-            <label>Country</label>
-        </div>
-    </form>
-</div>
-
-<div class="data-container">
-    
-
-
-</div>
-
+</script>
 
 <?php
 
-$country = $_POST['country'];
+if (isset($_POST['country'])) {
 
-$command = escapeshellcmd("python3 ../backend/Python/country_data.py" . escapeshellarg($country));
+  $country_name = $_POST['country'];
+  $command = escapeshellcmd("python3 ../backend/Python/country_data.py" . escapeshellarg($country_name));
+  $output = shell_exec($command);
+  $data = json_decode($data, true);
 
-$output = shell_exec($command);
-    
-echo("$output");
+  $country = $data['Country'];
+  $capital = $data['Capital'];
+  $population = $data['Population'];
+  $region = $data['Region'];
+  $currency = $data['Currency'];
+
+} else {
+
+  $country = '-----';
+  $capital = '-----';
+  $population = '-----';
+  $region = '-----';
+  $currency = '-----';
+
+}
 
 ?>
+
+
+<div id="wrapper">
+    <div id="chartdiv"></div>
+</div>
+
+<div class="data-container">
+  <?php
+    if (!isset($_POST['country'])) {
+      echo '
+      <table>
+        <tr>
+            <td>Country:</td>
+            <td><h4 id="country-placeholder">---</h4></td>
+        </tr>
+        <tr>
+            <td>Capital:</td>
+            <td><h4 id="capital-placeholder">---</h4></td>
+        </tr>
+        <tr>
+            <td>Population:</td>
+            <td><h4 id="population-placeholder">---</h4></td>
+        </tr>
+        <tr>
+            <td>Region:</td>
+            <td><h4 id="region-placeholder">---</h4></td>
+        </tr>
+        <tr>
+            <td>Currency:</td>
+            <td><h4 id="currency-placeholder">---</h4></td>
+        </tr>
+      </table>
+      '; 
+    } else {
+      
+
+
+    }
+  ?>
+    
+</div>
+
