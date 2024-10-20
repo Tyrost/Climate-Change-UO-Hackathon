@@ -2,10 +2,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# TODO add a way to bring in data from database
-EMAILS = ['example@gmail.com']
+EMAILS = get_emails.subscribers
 
-TEMPLATE = f"Thank you for subscribing to the Newsletter, here is your weekly news:"
+TEMPLATE = "Thank you for subscribing to the Newsletter, here is"
 
 def send_email(email, body, subject):
     """
@@ -15,7 +14,7 @@ def send_email(email, body, subject):
     server_name = 'smtp.gmail.com'
     port = 587
     sender = 'tyrost9@gmail.com'
-    password = ''
+    password = 'ksdcflhwpxelzpcc'
 
     try:
         server = smtplib.SMTP(server_name, port)
@@ -26,15 +25,17 @@ def send_email(email, body, subject):
         msg['From'] = sender
         msg['To'] = email
         msg['Subject'] = subject
-
         msg.attach(MIMEText(body))
 
+        server.sendmail(sender, email, msg.as_string())
+        print(f"Email successfully sent to {email}")
+
     except Exception as e:
-        print(f"failed to send email: {e}")
+        print(f"Failed to send email: {e}")
 
     finally:
         server.quit()
 
 def send_all():
     for i in EMAILS:
-        send_email(EMAILS[i], TEMPLATE, 'Regular subscriber newsletter for Fire News.')
+        send_email(EMAILS[i][0], TEMPLATE, 'Regular subscriber newsletter')
