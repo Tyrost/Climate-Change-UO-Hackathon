@@ -1,38 +1,28 @@
 <?php
-// Database connection details
-$servername = "localhost";  // Replace with your MySQL server (usually 'localhost')
-$username = "root";         // Your MySQL username
-$password = "";             // Your MySQL password (leave empty if no password is set)
-$dbname = "SubscribersDB";  // The name of the database you created
 
-// Create a connection to the MySQL database
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Input Newsletter User data onto SQL LocalHost DB
 
-// Check if the connection was successful
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$name = $_POST["name"];
+$email = $_POST["email"];
 
-// Check if form data was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect and sanitize input
-    $name = htmlspecialchars(strip_tags($_POST['name']));
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$host = '127.0.0.1';
+$port = '3306';
+$db = 'uohackathon2024';
+$dns = "mysql:host=$host;port=$port;dbname=$db";
 
-    // Prepare and bind the SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO subscribers (name, email) VALUES (?, ?)");
-    $stmt->bind_param("ss", $name, $email); // 'ss' means both variables are strings
+$username = 'root';
+$password = 'M12n2B3v4!';
 
-    // Execute the statement and check if successful
-    if ($stmt->execute()) {
-        echo "<h2>Thank you, $name! You've been subscribed with $email.</h2>";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+$conn = new PDO($dns, $username, $password);
 
-    // Close the statement and connection
-    $stmt->close();
-}
+$query="INSERT INTO newsletter(name, email) VALUES (:name, :email);";
 
-$conn->close();
+$statement = $conn->prepare($query);
+
+$statement->bindValue(":name", $name);
+$statement->bindValue(":email", $email);
+
+$statement->execute();
+
+// $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>

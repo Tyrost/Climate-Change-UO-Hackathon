@@ -1,11 +1,10 @@
 import requests
-from pprint import pprint
 from sys import argv
 from json import dumps
 
 def get_api_data(country_name:str):
 
-    name = country_name.lower()
+    name = country_name.lower().strip().replace(' ', '')
 
     api_url = f'https://restcountries.com/v3.1/name/{name}'
 
@@ -17,7 +16,7 @@ def get_api_data(country_name:str):
         return data
     
     else:
-        raise BufferError(f"There was an error obtaining the data. Error code {response.status_code}")
+        raise BufferError(f'There was an error obtaining the data. Error code {response.status_code}')
     
 def fetch_data(country_name) -> dict:
 

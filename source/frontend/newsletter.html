@@ -5,45 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title class="main-big-letters">Newsletter Subscription</title>
-    <link rel="stylesheet" href="components/newsletter.css">
+    <link rel="stylesheet" href="./components/newsletter.css">
+    <link rel="stylesheet" href="./components/general.css">
 </head>
+
 <body>
-    <div class="Menu">
-        <nav class="menu-bar">
-                <button><a href="rankings.html">Rankings</a></button>
-                <button><a href="future.html">Future</a></button>
-                <button><a href="countries.html">Countries</a></button>
-                <button><a href="newsletter.html">Newsletter</a></button>
-        </nav>
+
+    <div class="menu-bar">
+            <div class="button-container">
+                <button class="home-button" onclick="location.href='../index.php'">Home</button>
+                <button class="countries-button" onclick="location.href='./frontend/countries.php'">Countries</button>
+                <button class="rankings-button" onclick="location.href='./frontend/rankings.html'">Rankings</button>
+                <button class="future-button" onclick="location.href='./frontend/future.html'">Future</button>
+                <button class="newsletter-button" onclick="location.href='./frontend/newsletter.html'">Newsletter</button>
+            </div>
     </div>
-    
-    <div class="main-title-container">
-        <h1 id="main-big-letters">Subscribe to our Newsletter</h1>
+
+    <div class="side-shape" id="shape-one"></div>
+    <div class="side-shape" id="shape-two"></div>
+
+    <div class="newsletter-word-container" style="position: absolute; right: 20%; top: 20vh;">
+        <h2 style="font-size: 50px; color: white; font-family: Roobert, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; text-align: center;">
+            Consider Subscribing to our Newsletter!
+        </h2>
+        <h3 style="font-size: 18px; color:tomato; font-family: Roobert, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; text-align: center;">
+            We offer monthly updates on new data and research.<br>
+            Explore and observe how our world is changing as time flies by.<br>
+        </h3>
     </div>
-    <div class="main-background-container">
-        <br>
+
+    <div class="form-container">
         <form action="../backend/PHP/newsletter.php" method="post">
-            <div class="row">
-                <div class="col-25">
-                    <label for="name">Name:</label>
-                </div>
-                <div class="col-75">
-                <input type="text" id="name" name="name" placeholder="Your name..">
-                </div>
+            <div class="input-box">
+                <input type="text" name="name" required>
+                <label>Name</label>
             </div>
-            <div class="row">
-                <div class="col-25">
-                <label for="email">Email:</label>
-                </div>
-                <div class="col-75">
-                <input type="email" id="email" name="email" placeholder="Your email..">
-                </div>
+            <div class="input-box">
+                <input type="password" name="email" required>
+                <label>Email</label>
             </div>
-            <br>
-            <div class="col-25">
-                <input type="submit" value="Subscribe">
-            </div>
+            <input type="submit" name="submit-login" value="Submit">
         </form>
     </div>
+        
 </body>
 </html>
