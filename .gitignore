@@ -1,1 +1,4 @@
 venv/
+outputs/
+slurm_logs/
+__pycache__/
