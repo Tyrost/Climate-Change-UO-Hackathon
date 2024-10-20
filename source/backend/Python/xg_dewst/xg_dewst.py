@@ -46,7 +46,9 @@ def _get_date_range(date_str, days_back, days_forward):
 
 
 def _get_history_dict(pred_df, back_range):
-    hist = pred_df.loc[back_range]
+    _, y_feat = _get_feat_names()
+
+    hist = pred_df.loc[back_range, y_feat]
     hist["date"] = hist.index.strftime("%Y-%m-%d")
     return hist.set_index("date").T.to_dict()
 
