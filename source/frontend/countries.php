@@ -1,27 +1,11 @@
 <!--Credit--> 
 <!--https://www.amcharts.com/demos/zooming-to-countries-map/-->
 
-<!-- Styles -->
-<style>
-  #wrapper {
-    width: 100%;
-    height: 100%;
-    background-color: black;
-  }
-</style>
+<link rel="stylesheet" href="./components/general.css">
+<link rel="stylesheet" href="./components/countries.css">
 
-  <style>
-    #chartdiv {
-      width: 55%;
-      height: 700px;
-      top: 10vh;
-      left: 10vh;
-      float: left;
-    }
-    </style>
-    
-    <!-- Resources -->
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
     <!--script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"</script-->
     <script src="../backend/js/countrydata.js"></script>
@@ -72,15 +56,14 @@
       exclude: ["AQ"]
 
     }));
-
     polygonSeries.mapPolygons.template.setAll({
       //information with go next to tooltipText
       tooltipText: "{name}",
       fill: am5.color(0xb92637),
       toggleKey: "active",
       interactive: true
-    });
-    
+    }
+    );
     polygonSeries.mapPolygons.template.states.create("hover", {
       fill: am5.color(0xd44b06)
     });
@@ -100,20 +83,42 @@ backgroundSeries.mapPolygons.template.setAll({
 backgroundSeries.data.push({
   geometry: am5map.getGeoRectangle(90, 180, -90, -180)
 }); 
-    var previousPolygon;
-    
-    polygonSeries.mapPolygons.template.on("active", function (active, target) {
-      if (previousPolygon && previousPolygon != target) {
+var previousPolygon;
+var countryName; 
+polygonSeries.mapPolygons.template.on("active", function (active, target) {
+    if (previousPolygon && previousPolygon != target) {
         previousPolygon.set("active", false);
       }
       if (target.get("active")) {
-        polygonSeries.zoomToDataItem(target.dataItem );
+        countryName = target.dataItem.dataContext.name; // Access the name directly
+        
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ country: countryName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Optional: Log the response from PHP
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        polygonSeries.zoomToDataItem(target.dataItem);
+        //console.log("Clicked on", target.get("tooltipText"));
       }
       else {
-        chart.goHome();
+        //chart.goHome();
       }
       previousPolygon = target;
     });
+
+//polygonSeries.mapPolygons.template.events.on("click", function(ev) {
+ // console.log("Clicked on", ev.target.dataItem.get("name"));
+//});
     
     
     // Add zoom control
@@ -132,40 +137,41 @@ backgroundSeries.data.push({
     
     }); // end am5.ready()
   </script>
-    
-<!-- HTML -->
-
-<!--Right Side DATA-->
-<style>
-      #datadiv {
-        width: 35%;
-        height: 500px;
-        margin-left: 60%;
-        white-space: normal;
-        inline-size: auto;
-        color: #ebebeb;
-      }
-        </style>
-        
-        <!-- Resources -->
-        <!--div>I'm on the right</div-->
-        <!-- Chart code -->
-        <script>
-        
-        // Set clicking on "water" to zoom out
-        //chart.chartContainer.get("background").events.on("click", function () {
-        //  chart.goHome();
-        // })
-        
-        
-        // Make stuff animate on load
-        //chart.appear(1000, 100);
-        
-        </script>
-        
-        <!-- HTML -->
 
 <div id="wrapper">
     <div id="chartdiv"></div>
+
+    
     <div id="datadiv">Right Side</div>
+
+    <div id="countryName" style="font-size: 24px; text-align: center;">Click a country to see its name</div>
+
 </div>
+
+<div class="input-group" >
+    <form action="" method="post">
+        <div class="input-box">
+            <input type="text" name="country" required>
+            <label>Country</label>
+        </div>
+    </form>
+</div>
+
+<div class="data-container">
+    
+
+
+</div>
+
+
+<?php
+
+$country = $_POST['country'];
+
+$command = escapeshellcmd("python3 ../backend/Python/country_data.py" . escapeshellarg($country));
+
+$output = shell_exec($command);
+    
+echo("$output");
+
+?>
