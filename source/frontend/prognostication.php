@@ -113,7 +113,7 @@ if (isset($result) && isset($result['data']) && is_array($result['data'])) {
     $prediction_data = $result['data'][2];
 ?>
 
-<h2 style="position: absolute; right: 25%; top: 70vh; font-size: 40px; color: white; 
+<h2 style="position: absolute; right: 23%; top: 70vh; font-size: 40px; color: white; 
     font-family: Roobert, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; text-align: center;">
     Weather and Vapor-pressure Deficit Data for<br><?php echo htmlspecialchars($location); ?>
@@ -155,7 +155,7 @@ if (isset($result) && isset($result['data']) && is_array($result['data'])) {
             // Historical data
             foreach ($historical_data as $dayData) {
                 if (isset($dayData[$key])) {
-                    echo '<td>' . htmlspecialchars($dayData[$key]) . '</td>';
+                    echo '<td>' . htmlspecialchars(round($dayData[$key], 2)) . '</td>';
                 } else {
                     echo '<td></td>';
                 }
@@ -164,7 +164,7 @@ if (isset($result) && isset($result['data']) && is_array($result['data'])) {
             // Prediction data
             foreach ($prediction_data as $dayData) {
                 if (isset($dayData[$key])) {
-                    echo '<td>' . htmlspecialchars($dayData[$key]) . '</td>';
+                    echo '<td>' . htmlspecialchars(round($dayData[$key], 2)) . '</td>';
                 } else {
                     echo '<td></td>';
                 }
