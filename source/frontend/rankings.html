@@ -4,26 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Table with JavaScript</title>
-    <link rel="stylesheet" href="components/rankings.css">
+    <link rel="stylesheet" href="./components/rankings.css">
+    <link rel="stylesheet" href="./components/general.css">
 </head>
 <body>
 
-    <h1>Top 50</h1>
+    <div class="menu-bar">
+        <div class="button-container">
+            <button class="home-button" onclick="location.href='../index.php'">Home</button>
+            <button class="countries-button" onclick="location.href='./countries.php'">Countries</button>
+            <button class="rankings-button" onclick="location.href='./rankings.html'">Rankings</button>
+            <button class="Prognostication-button" onclick="location.href='./prognostication.html'">Prognostication</button>
+            <button class="newsletter-button" onclick="location.href='./newsletter.html'">Newsletter</button>
+        </div>
+    </div>
+
+    <h1 style='color: white; font-size: 50px; top:20vh; left: 32%; position: absolute; justify-items: center; font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;'>Top 50 Emission Nations</h1>
+
+    <p style='line-height: 1.6; font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;; position: absolute; color:white; text-align: center; top:40vh; left: 30%;''>
+        Our data represent the highest nation's Carbon Dioxide emissions in the world.<br>
+        Each nation's population is gathered from 2023, and it is used to calculate the aggregate<br>
+        quotient of its contribution towards climate change.<br>
+        The data is sorted by this derived quotient, which represents<br>
+        how much CO2 (in kilograms) is produced per person on average from this relative area.<br>
+    </p>
+    <div class="parent-container">
+    <div class="table-container">
+
     <table id="dataTable">
       <!------------------------------------------------------------------------->
         <thead>
             <tr>
-                <th>Rank #</th>
-                <th>Country Name</th>
-                <th>Total CO2 Emmisions (Kilograms)</th>
+                <th>Rank</th>
+                <th>Country</th>
+                <th>CO2 Emissions (Kilograms)</th>
                 <th>Population</th>
-                <th>CO2 Emmisions PerCapita</th>
+                <th>Emmisions PerCapita</th>
             </tr>
         </thead>
         <tbody>
             <!-- Rows will be added here -->
         </tbody>
     </table>
+    </div>
+    </div>
+
+    <h1 style='color: white; font-size: 12px; top: 2%; left: 2%; position: absolute; justify-items: center; font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;'>Data From:<br>edgar.jrc.ec.europa.eu/report_2024</h1>
+
     <script src="../backend/JS/rankings.js"></script>
 </body>
 </html>
