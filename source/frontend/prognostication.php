@@ -135,8 +135,6 @@ if (isset($result) && isset($result['data']) && is_array($result['data'])) {
     <tbody>
         <?php 
         $metrics = [
-            'Longitude',
-            'Latitude',
             'tempmin' => 'Min Temperature',
             'tempmax' => 'Max Temperature',
             'tempmean' => 'Mean Temperature',
@@ -183,6 +181,13 @@ if (isset($result) && isset($result['data']) && is_array($result['data'])) {
     echo '<p color: white;>No data available.</p>';
 }
 ?>
+
+<h1 style='color: white; font-size: 12px; top: 2%; right: 2%; position: absolute; justify-items: center;
+font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;'>
+Climate metrics are courtesy of the PRISM Climate Group.<br>
+PRISM Climate Group, Oregon State University,<br>
+https://prism.oregonstate.edu, data created 4 Feb 2014,<br>
+accessed 20 Oct 2024.</h1>
 
 </body>
 </html>

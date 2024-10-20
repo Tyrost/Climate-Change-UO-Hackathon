@@ -2,7 +2,6 @@ table {
     position: absolute;
     top: 105vh;
     width: 80%;
-    border-collapse: collapse;
     justify-items: center;
 }
 
