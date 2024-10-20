@@ -1,0 +1,77 @@
+<table id="dataTable">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dynamic Table with JavaScript</title>
+        <!--link rel="stylesheet" href="./components/rankings.css"-->
+        <!--link rel="stylesheet" href="./components/general.css"-->
+    </head>
+    <body>
+    
+        <div>
+            <table id = "stats" style="float: left" border="1">
+                <thead>
+                    <tr>
+                        <th>Stats</th>
+                        
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <td align="center">°F</td>
+                        </tr>
+                        <tr>
+                            <td>Temp (min)</td>
+                        </tr>
+                        <tr>
+                            <td>Temp (max)</td>
+                        </tr>
+                        <tr>
+                            <td>Temp (mean)</td>
+                        </tr>
+                        <tr>
+                            <td>VPD (min)</td>
+                        </tr>
+                        <tr>
+                            <td>VPD (max)</td>
+                        </tr>
+                </tbody>
+            <table id = "input" style="float: left" border="1">
+                <thead>
+                    <tr> 
+                        <th>Day 1</th>
+                        <th>Day 2</th>
+                        <th>Day 3</th>
+                        <th>Day 4</th>
+                        <th>Day 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be added here -->
+                </tbody>
+            </table>
+            <table id="prog" style="float: left;" border="1">
+                <!------------------------------------------------------------------------->
+                  <thead>
+                    <tr>
+                        <th>Day 1</th>
+                        <th>Day 2</th>
+                        <th>Day 3</th>
+                        <th>Day 4</th>
+                        <th>Day 5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <!-- Rows will be added here -->
+                  </tbody>
+              </table>
+          </div>
+
+        </div>
+        </div> 
+        <script src="../backend/JS/moment.min.js"></script> 
+        <script src="../backend/JS/progtable.js"></script>
+    </body>
+    </html>
