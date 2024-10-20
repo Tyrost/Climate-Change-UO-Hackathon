@@ -6,6 +6,7 @@
     <title>UO Hackathon</title>
 
     <!-- <link rel="stylesheet" href="/source/frontend/components/index.css"> -->
+    <link rel="stylesheet" href="./frontend/components/general.css">
     <link rel="stylesheet" href="./frontend/components/index.css">
 
 </head>
@@ -15,11 +16,11 @@
 
     <div class="menu-bar">
             <div class="button-container">
-                <button class="home-button">Home</button>
-                <button class="countries-button">Countries</button>
-                <button class="rankings-button">Rankings</button>
-                <button class="future-button">Future</button>
-                <button class="newsletter-button">Newsletter</button>
+                <button class="home-button" onclick="location.href='./index.php'">Home</button>
+                <button class="countries-button" onclick="location.href='./frontend/countries.html'">Countries</button>
+                <button class="rankings-button" onclick="location.href='./frontend/rankings.html'">Rankings</button>
+                <button class="future-button" onclick="location.href='./frontend/future.html'">Future</button>
+                <button class="newsletter-button" onclick="location.href='./frontend/newsletter.html'">Newsletter</button>
             </div>
     </div>
 
