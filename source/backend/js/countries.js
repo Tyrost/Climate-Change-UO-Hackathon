@@ -95,4 +95,5 @@ am5.ready(function() {
     
     chart.appear(1000, 100);
     
-    }); 
+    });
+    
