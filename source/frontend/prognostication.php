@@ -21,7 +21,7 @@
         <input type="submit" value="Submit">
     </form>
     
-      <?php
+<?php
 
 function getPrognostication($latitude, $longitude, $date) {
     $python_path = "../backend/Python/xg_dewst/xg_dewst.py";
@@ -86,10 +86,81 @@ try {
     ];
 }
 
-
 // print_r($result);
-
 ?>
+
+<!-- ---------------------------------------------------------------- -->
+
+<table id="dataTable">
+
+<div class="table-container">
+    <table id = "stats" style="float: left" border="1">
+    <thead>
+        <tr>
+        <th>Stats</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">Â°F</td>
+        </tr>
+        <tr>
+            <td>Temp (min)</td>
+        </tr>
+        <tr>
+            <td>Temp (max)</td>
+        </tr>
+        <tr>
+            <td>Temp (mean)</td>
+        </tr>
+        <tr>
+            <td>VPD (min)</td>
+        </tr>
+        <tr>
+            <td>VPD (max)</td>
+        </tr>
+    </tbody>
+    <!-- TABLE OF ALREADY EXISTENT DATES -->
+    <table id = "input" style="float: left" border="1">
+    <thead>
+        <tr> 
+            <th>Day 1</th>
+            <th>Day 2</th>
+            <th>Day 3</th>
+            <th>Day 4</th>
+            <th>Day 5</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <!-- Takes JS file and inputs data here -->
+
+    </tbody>
+    </table>
+
+    <!-- TABLE OF PROGNOSTICATED DATES -->
+
+    <table id="prog" style="float: left;" border="1">
+    <thead>
+    <tr>
+        <th>Day 1</th>
+        <th>Day 2</th>
+        <th>Day 3</th>
+        <th>Day 4</th>
+        <th>Day 5</th>
+    </tr>
+    </thead>
+    <tbody>
     
+    <!-- Takes JS file and inputs data here -->
+
+    </tbody>
+    </table>
+</div>
+
+
+<script src="../backend/JS/moment.min.js"></script> 
+<script src="../backend/JS/progtable.js"></script>
+
 </body>
 </html>
