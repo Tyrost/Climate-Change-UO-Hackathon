@@ -12,13 +12,14 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 
+path = '../backend/Python/xg_dewst/'
 
-_dewst = xgb.XGBRFRegressor()
-_dewst.load_model("dewst01.model")
+_dewst:xgb.XGBRFRegressor = xgb.XGBRFRegressor()
+_dewst.load_model(path + "dewst01.model")
 
-_history = pd.read_parquet("history.parquet")
-_cities = pd.read_parquet("cities.parquet")
-with open("city_kd.pkl", "rb") as f:
+_history = pd.read_parquet(path + "history.parquet")
+_cities = pd.read_parquet(path + "cities.parquet")
+with open(path + "city_kd.pkl", "rb") as f:
     _kdtree = pickle.load(f)
 
 def _get_feat_names():
@@ -122,8 +123,6 @@ if __name__ == "__main__":
     latitude = sys.argv[1]
     longitude = sys.argv[2]
     date_str = sys.argv[3]
-    # history_days = sys.argv[4]
-    # predict_days = sys.argv[5]
 
     data = project_climate_metrics(latitude, longitude, date_str)#, history_days, predict_days)
 
