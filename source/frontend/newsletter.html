@@ -4,33 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Newsletter Subscription</title>
-    <link rel="stylesheet" href="components/index.css">
+    <title class="main-big-letters">Newsletter Subscription</title>
+    <link rel="stylesheet" href="components/newsletter.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Subscribe to our Newsletter</h1>
-        <form action="../backend/PHP/newsletter.php" method="post">
-            <div class="container">
-    <form action="../backend/PHP/newsletter.php" method="post">
-        <div class="row">
-            <div class="col-25">
-            <label for="fname">First Name</label>
-            </div>
-            <div class="col-75">
-            <input type="text" id="fname" name="firstname" placeholder="Your name..">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-25">
-            <label for="lname">Last Name</label>
-            </div>
-            <div class="col-75">
-            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-            </div>
-        </div>
-        </form>
-        <p>We respect your privacy. No spam, ever.</p>
+    <div class="Menu">
+        <nav class="menu-bar">
+                <button><a href="rankings.html">Rankings</a></button>
+                <button><a href="future.html">Future</a></button>
+                <button><a href="countries.html">Countries</a></button>
+                <button><a href="newsletter.html">Newsletter</a></button>
+        </nav>
     </div>
+    
+    <div class="main-background-container"></div>
+        <div class="title">
+            <h1>Subscribe to our Newsletter</h1>
+        </div>
+        <form action="../backend/PHP/newsletter.php" method="post">
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Name:</label>
+                </div>
+                <div class="col-75">
+                <input type="text" id="name" name="name" placeholder="Your name..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                <label for="email">Email:</label>
+                </div>
+                <div class="col-75">
+                <input type="email" id="email" name="email" placeholder="Your email..">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <input type="submit" value="Subscribe">
+            </div>
+            </form>
+        </div>
+    </form>
 </body>
 </html>

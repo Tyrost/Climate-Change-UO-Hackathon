@@ -9,10 +9,10 @@ body {
 
 .main-background-container {
     position: absolute;
-    top: 12vh;
+    top: 20vh;
     width: 100%;
-    height: 58.5vh;
-    background-color: black;
+    height: 70vh;
+    background-color: rgb(172, 148, 111);
     z-index: -2;
 }
 
@@ -159,12 +159,27 @@ input[type=email] {
 
 .col-25 {
     float: left;
-    width: 55%;
+    width: 100%;
     margin-top: 6px;
+    margin-left: 10px;
 }
   
 .col-75 {
     float: left;
-    width: 75%;
+    width: 180%;
     margin-top: 6px;
+    margin-left: 10px;
+}
+
+.row {
+    float: left;
+    width: 55%;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+.main-title {
+    float: left;
+    margin-top: 60px;
+    margin-left: 10px;
 }

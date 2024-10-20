@@ -2,9 +2,10 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+# TODO add a way to bring in data from database
 EMAILS = ['example@gmail.com']
 
-TEMPLATE = "Thank you for subscribing to the Newsletter, here is"
+TEMPLATE = f"Thank you for subscribing to the Newsletter, here is your weekly news:"
 
 def send_email(email, body, subject):
     """
@@ -36,4 +37,4 @@ def send_email(email, body, subject):
 
 def send_all():
     for i in EMAILS:
-        send_email(EMAILS[i], TEMPLATE, 'Regular subscriber newsletter')
+        send_email(EMAILS[i], TEMPLATE, 'Regular subscriber newsletter for Fire News.')
