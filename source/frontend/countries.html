@@ -7,6 +7,7 @@
     width: 100%;
     height: 100%;
     background-color: black;
+    margin: 0%;
   }
 </style>
 
@@ -72,15 +73,14 @@
       exclude: ["AQ"]
 
     }));
-
     polygonSeries.mapPolygons.template.setAll({
       //information with go next to tooltipText
       tooltipText: "{name}",
       fill: am5.color(0xb92637),
       toggleKey: "active",
       interactive: true
-    });
-    
+    }
+    );
     polygonSeries.mapPolygons.template.states.create("hover", {
       fill: am5.color(0xd44b06)
     });
@@ -100,20 +100,26 @@ backgroundSeries.mapPolygons.template.setAll({
 backgroundSeries.data.push({
   geometry: am5map.getGeoRectangle(90, 180, -90, -180)
 }); 
-    var previousPolygon;
-    
-    polygonSeries.mapPolygons.template.on("active", function (active, target) {
-      if (previousPolygon && previousPolygon != target) {
+var previousPolygon;
+var countryName; 
+polygonSeries.mapPolygons.template.on("active", function (active, target) {
+    if (previousPolygon && previousPolygon != target) {
         previousPolygon.set("active", false);
       }
       if (target.get("active")) {
-        polygonSeries.zoomToDataItem(target.dataItem );
+        countryName = target.dataItem.dataContext.name; // Access the name directly
+        polygonSeries.zoomToDataItem(target.dataItem);
+        //console.log("Clicked on", target.get("tooltipText"));
       }
       else {
-        chart.goHome();
+        //chart.goHome();
       }
       previousPolygon = target;
     });
+
+//polygonSeries.mapPolygons.template.events.on("click", function(ev) {
+ // console.log("Clicked on", ev.target.dataItem.get("name"));
+//});
     
     
     // Add zoom control
@@ -151,7 +157,7 @@ backgroundSeries.data.push({
         <!--div>I'm on the right</div-->
         <!-- Chart code -->
         <script>
-        
+        document.getElementById('datadiv') = countryName
         // Set clicking on "water" to zoom out
         //chart.chartContainer.get("background").events.on("click", function () {
         //  chart.goHome();
