@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table with JavaScript</title>
+    <link rel="stylesheet" href="components/rankings.css">
+</head>
+<body>
+
+    <h1>Top 50</h1>
+    <table id="dataTable">
+      <!------------------------------------------------------------------------->
+        <thead>
+            <tr>
+                <th>Rank #</th>
+                <th>Country Name</th>
+                <th>Total CO2 Emmisions (Kilograms)</th>
+                <th>Population</th>
+                <th>CO2 Emmisions PerCapita</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here -->
+        </tbody>
+    </table>
+    <script src="../backend/JS/rankings.js"></script>
+</body>
+</html>
+
+<!--Citation:
+
+Based on IEA-EDGAR CO2 (v3), EDGAR CH4, EDGAR N2O, EDGAR F-gases, a component of the EDGAR (Emissions Database for Global Atmospheric Research) Community GHG database version EDGAR_2024_GHG (2024), 
+derived from IEA (2023) World Energy Balances, www.iea.org/statistics; Energy Institute, https://www.energyinst.org/statistical-review (2024); IATA (2024), International Air Transport Association Statistics, 
+www.iata.org/en/iata-repository/pressroom/fact-sheets/industry-statistics; IFA (2023), www.ifastat.org/; FAOSTAT (2024), Statistics Division of the Food and Agricultural Organisation of the UN: www.fao.org/faostat; 
+USGS (2024), USGS Commodity Statistics, (www.usgs.gov/centers/nmic/commodity-statistics-and-information); World Steel Association (2024), Steel Statistical Yearbook 2024, as modified by the Joint Research Centre.
+
+
+-->
