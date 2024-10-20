@@ -1,24 +1,28 @@
-
-// Select the tbody element of the table
+//input
 const tableBody = document.querySelector('#input tbody'); 
-var dat = [];
+var input_database = [];
 var j = 0;
 function inputTable(data) {
-    dat[j] = data; // Store the current data
+    input_database[j] = data; // Store the current data
     j++; // Increment the counter
 
     // Clear existing rows in the table body
-    tableBody.innerHTML = '';
+    if (j > 5)
+    {
+        tableBody.innerHTML = '';
+        input_database = [];
+        return;
+    }
 
     // Get all unique dates from the stored data
     const allDates = [];
-    dat.forEach(entry => {
+    input_database.forEach(entry => {
         allDates.push(...Object.keys(entry)); // Add all dates to the array
     });
     
     // Get unique dates and limit to 5
     const uniqueDates = [...new Set(allDates)];
-    if (uniqueDates.length > 5) return; // Limit to 5 unique dates
+    // Limit to 5 unique dates
 
     // Create a header row for the dates
     const headerRow = document.createElement('tr');
@@ -38,7 +42,7 @@ function inputTable(data) {
         uniqueDates.forEach(date => {
             const cellData = document.createElement('td'); // Use <td> for data cells
             // Find the relevant data for the date
-            const relevantData = dat.find(entry => entry[date]); // Get the data for the specific date
+            const relevantData = input_database.find(entry => entry[date]); // Get the data for the specific date
             cellData.textContent = relevantData ? relevantData[date][dataType] : ''; // Safely access the data
             dataRow.appendChild(cellData); // Append the cell to the data row
         });
@@ -46,55 +50,62 @@ function inputTable(data) {
         tableBody.appendChild(dataRow); // Append the data row to the tbody
     });
 }
-    // Append the data row to the tbody
-    //tableBody.appendChild(dataRow);
 
 
-    /*const dataTypes = ['tempmin', 'tempmean', 'tempmax', 'vpdmin', 'vpdmax'];
-    
-    dataTypes.forEach(dataType => {
-        const dataRow = document.createElement('tr');
-
-        for (let i = 0; i < dates.length; i++) {
-            const cellData = document.createElement('td'); // Use <td> for data cells
-            cellData.textContent = data[dates[i]][dataType]; // Access the specific data for the date
-            dataRow.appendChild(cellData); // Append the cell to the data row
-        }
-
-        tableBody.appendChild(dataRow); // Append the data row to the tbody
-    });
-}*/
+//output
+var output_database = [];
+var k = 0;
 const prog_tableBody = document.querySelector('#prog tbody'); 
 function progTable(data){
+    output_database[k] = data; // Store the current data
+    k++; // Increment the counter
+
+    // Clear existing rows in the table body
+    if (k > 5)
+    {
+        prog_tableBody.innerHTML = '';
+        output_database = [];
+        return;    
+    }   
+
+    // Get all unique dates from the stored data
+    const allDates = [];
+    output_database.forEach(entry => {
+        allDates.push(...Object.keys(entry)); // Add all dates to the array
+    });
     
-    const dates = Object.keys(data);
-    const row = document.createElement('tr');
-    if (dates.length > 5)
-        return
-// Use a for loop to generate table rows
-    for (let i = 0; i < dates.length; i++) {
+    // Get unique dates and limit to 5
+    const uniqueDates = [...new Set(allDates)];
+    // Limit to 5 unique dates
+
+    // Create a header row for the dates
+    const headerRow = document.createElement('tr');
+    uniqueDates.forEach(date => {
         const cellDay = document.createElement('th');
-        const date = moment(dates[i]).format('MMMM DD YYYY');
-        cellDay.textContent = date;;
-        row.appendChild(cellDay);
-        prog_tableBody.appendChild(row);
-    }
+        cellDay.textContent = moment(date).format('MMMM DD YYYY');
+        headerRow.appendChild(cellDay);
+    });
+    prog_tableBody.appendChild(headerRow); // Append the header row
+
     const dataTypes = ['tempmin', 'tempmean', 'tempmax', 'vpdmin', 'vpdmax'];
     
+    // Create rows for each data type
     dataTypes.forEach(dataType => {
         const dataRow = document.createElement('tr');
 
-        for (let i = 0; i < dates.length; i++) {
+        uniqueDates.forEach(date => {
             const cellData = document.createElement('td'); // Use <td> for data cells
-            cellData.textContent = data[dates[i]][dataType]; // Access the specific data for the date
+            // Find the relevant data for the date
+            const relevantData = output_database.find(entry => entry[date]); // Get the data for the specific date
+            cellData.textContent = relevantData ? relevantData[date][dataType] : ''; // Safely access the data
             dataRow.appendChild(cellData); // Append the cell to the data row
-        }
+        });
 
         prog_tableBody.appendChild(dataRow); // Append the data row to the tbody
     });
 }
 
-var data = {'2021-03-17': {'Name': 'Homestead',
+/*var data = {'2021-03-17': {'Name': 'Homestead',
   'tempmin': 67.6,
   'tempmean': 75.1,
   'tempmax': 82.0,
@@ -122,4 +133,4 @@ data = {
   'vpdmin': 2.1,
   'vpdmax': 18.56}
 }
-inputTable(data);
+inputTable(data);*/

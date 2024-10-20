@@ -5,21 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prognostication Page</title>
+
+    <link rel="stylesheet" href="./components/general.css">
+    <link rel="stylesheet" href="./components/prog.css">
+
 </head>
-<body>
+<body style="background:darkred;">
 
+    <div class="menu-bar">
+        <div class="button-container">
+            <button class="home-button" onclick="location.href='../index.php'">Home</button>
+            <button class="countries-button" onclick="location.href='./countries.php'">Countries</button>
+            <button class="rankings-button" onclick="location.href='./rankings.html'">Rankings</button>
+            <button class="prognostication-button" onclick="location.href='./prognostication.php'">Prognostication</button>
+            <button class="newsletter-button" onclick="location.href='./newsletter.html'">Newsletter</button>
+        </div>
+    </div> 
+
+    <div class="form-container">
     <form action="" method="get" id="form-id">
-        <label for="lat">Latitude:</label><br>
-        <input type="number" id="lat" name="lat" required step="any"><br>
-        
-        <label for="long">Longitude:</label><br>
-        <input type="number" id="long" name="long" required step="any"><br>
-
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" name="date" required><br>
-
+        <div class="input-box">
+            <label for="lat">Latitude:</label><br>
+            <input type="number" id="lat" name="lat" required step="any"><br>
+        </div>
+        <div class="input-box">
+            <label for="long">Longitude:</label><br>
+            <input type="number" id="long" name="long" required step="any"><br>
+        </div>
+        <div class="calendar" style="position:absolute; left: 38%;">
+            <label for="date"></label>
+            <input type="date" id="date" name="date" required><br>
+        </div>
+        <br>
+        <br>
         <input type="submit" value="Submit">
-    </form>
+    </form> 
+    </div>
     
 <?php
 
@@ -86,81 +107,82 @@ try {
     ];
 }
 
-// print_r($result);
+if (isset($result) && isset($result['data']) && is_array($result['data'])) {
+    $location = $result['data'][0];
+    $historical_data = $result['data'][1];
+    $prediction_data = $result['data'][2];
 ?>
 
-<!-- ---------------------------------------------------------------- -->
-
-<table id="dataTable">
-
-<div class="table-container">
-    <table id = "stats" style="float: left" border="1">
+<h2 style="position: absolute; right: 25%; top: 70vh; font-size: 40px; color: white; 
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; text-align: center;">
+    Weather and Vapor-pressure Deficit Data for<br><?php echo htmlspecialchars($location); ?>
+</h2>
+<table border="1">
     <thead>
         <tr>
-        <th>Stats</th>
+            <th style="font-weight: bold;">Stats</th>
+            <?php
+            foreach (array_keys($historical_data) as $date) {
+                echo '<th>' . htmlspecialchars($date) . '</th>';
+            }
+            foreach (array_keys($prediction_data) as $date) {
+                echo '<th>Prediction ' . htmlspecialchars($date) . '</th>';
+            }
+            ?>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td align="center">Â°F</td>
-        </tr>
-        <tr>
-            <td>Temp (min)</td>
-        </tr>
-        <tr>
-            <td>Temp (max)</td>
-        </tr>
-        <tr>
-            <td>Temp (mean)</td>
-        </tr>
-        <tr>
-            <td>VPD (min)</td>
-        </tr>
-        <tr>
-            <td>VPD (max)</td>
-        </tr>
+        <?php 
+        $metrics = [
+            'Longitude',
+            'Latitude',
+            'tempmin' => 'Min Temperature',
+            'tempmax' => 'Max Temperature',
+            'tempmean' => 'Mean Temperature',
+            'tdmean' => 'Mean TD',
+            'vpdmin' => 'Min VPD',
+            'vpdmax' => 'Max VPD'
+        ];
+
+        foreach ($metrics as $key => $label) {
+            if (is_numeric($key)) {
+                $key = $label;
+                $label = ucfirst($label);
+            }
+
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($label) . '</td>';
+            
+            // Historical data
+            foreach ($historical_data as $dayData) {
+                if (isset($dayData[$key])) {
+                    echo '<td>' . htmlspecialchars($dayData[$key]) . '</td>';
+                } else {
+                    echo '<td></td>';
+                }
+            }
+            
+            // Prediction data
+            foreach ($prediction_data as $dayData) {
+                if (isset($dayData[$key])) {
+                    echo '<td>' . htmlspecialchars($dayData[$key]) . '</td>';
+                } else {
+                    echo '<td></td>';
+                }
+            }
+            
+            echo '</tr>';
+        }
+        ?>
     </tbody>
-    <!-- TABLE OF ALREADY EXISTENT DATES -->
-    <table id = "input" style="float: left" border="1">
-    <thead>
-        <tr> 
-            <th>Day 1</th>
-            <th>Day 2</th>
-            <th>Day 3</th>
-            <th>Day 4</th>
-            <th>Day 5</th>
-        </tr>
-    </thead>
-    <tbody>
+</table>
 
-    <!-- Takes JS file and inputs data here -->
-
-    </tbody>
-    </table>
-
-    <!-- TABLE OF PROGNOSTICATED DATES -->
-
-    <table id="prog" style="float: left;" border="1">
-    <thead>
-    <tr>
-        <th>Day 1</th>
-        <th>Day 2</th>
-        <th>Day 3</th>
-        <th>Day 4</th>
-        <th>Day 5</th>
-    </tr>
-    </thead>
-    <tbody>
-    
-    <!-- Takes JS file and inputs data here -->
-
-    </tbody>
-    </table>
-</div>
-
-
-<script src="../backend/JS/moment.min.js"></script> 
-<script src="../backend/JS/progtable.js"></script>
+<?php
+} else {
+    echo '<p color: white;>No data available.</p>';
+}
+?>
 
 </body>
 </html>

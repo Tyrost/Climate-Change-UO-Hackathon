@@ -88,7 +88,7 @@ polygonSeries.mapPolygons.template.on("active", function (active, target) {
         countryName = target.dataItem.dataContext.name;
         
         fetch('', {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -125,25 +125,34 @@ chart.appear(1000, 100);
 </script>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if (isset($input['country'])) {
-        $country_name = $input['country'];
-        $command = escapeshellcmd("python3 ../backend/Python/country_data.py " . escapeshellarg($country_name));
-        $output = shell_exec($command);
-        $data = json_decode($output, true);
+$country = $_GET['country'] ?? null;
 
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
-    }
+if ($country) {
+
+  $command = escapeshellcmd("python3 ../backend/Python/country_data.py " . escapeshellarg($country));
+  $output = shell_exec($command);
+  $data = json_decode($output, true);
+
+  print_r($data);
+  
+  $country = $data['Country'];
+  $capital = $data['Capital'];
+  $population = $data['Population'];
+  $region = $data['Region'];
+  $currency = $data['Currency'];
+
+} else {
+
+  $country = '-----';
+  $capital = '-----';
+  $population = '-----';
+  $region = '-----';
+  $currency = '-----';
+
+  print_r(null);
+
 }
 
-$country = '-----';
-$capital = '-----';
-$population = '-----';
-$region = '-----';
-$currency = '-----';
 ?>
 
 <div class="menu-bar">
@@ -154,7 +163,7 @@ $currency = '-----';
       <button class="prognostication-button" onclick="location.href='./prognostication.php'">Prognostication</button>
       <button class="newsletter-button" onclick="location.href='./newsletter.html'">Newsletter</button>
   </div>
-</div>
+</div> 
 
 <div id="wrapper">
     <div id="chartdiv"></div>
