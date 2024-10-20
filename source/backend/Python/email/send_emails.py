@@ -1,9 +1,8 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import get_emails
 
-EMAILS = get_emails.subscribers
+EMAILS = ['example@gmail.com']
 
 TEMPLATE = "Thank you for subscribing to the Newsletter, here is"
 
@@ -37,4 +36,4 @@ def send_email(email, body, subject):
 
 def send_all():
     for i in EMAILS:
-        send_email(EMAILS[i][0], TEMPLATE, 'Regular subscriber newsletter')
+        send_email(EMAILS[i], TEMPLATE, 'Regular subscriber newsletter')
