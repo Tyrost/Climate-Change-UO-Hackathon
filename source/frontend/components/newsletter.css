@@ -82,6 +82,21 @@ button:active {
   box-shadow: none;
   transform: translateY(0);
 }
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
 /* -------------------------------------------------------- */
 
 
@@ -140,4 +155,16 @@ button:active {
     z-index: -1;
 
     clip-path: polygon(100% 0, 100% 100%, 30% 100%, 0 0);
+}
+
+.col-25 {
+    float: left;
+    width: 55%;
+    margin-top: 6px;
+}
+  
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
 }

@@ -1,0 +1,35 @@
+import mysql.connector  # or import pymysql
+
+# Database connection details
+config = {
+    'user': 'root',          # Your MySQL username
+    'password': '',          # Your MySQL password
+    'host': 'localhost',     # The hostname of the MySQL server
+    'database': 'SubscribersDB'  # The name of the database
+}
+
+try:
+    # Establish the database connection
+    connection = mysql.connector.connect(**config)  # or pymysql.connect(**config)
+
+    # Create a cursor object
+    cursor = connection.cursor()
+
+    # Define the SQL query to fetch subscriber data
+    query = "SELECT name, email FROM subscribers"
+
+    # Execute the query
+    cursor.execute(query)
+
+    # Fetch all results from the executed query
+    subscribers = cursor.fetchall()
+
+except mysql.connector.Error as err:
+    print(f"Error: {err}")
+
+finally:
+    # Close the cursor and connection
+    if cursor:
+        cursor.close()
+    if connection:
+        connection.close()
