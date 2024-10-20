@@ -15,7 +15,7 @@ def send_email(email, body, subject):
     server_name = 'smtp.gmail.com'
     port = 587
     sender = 'tyrost9@gmail.com'
-    password = 'ksdcflhwpxelzpcc'
+    password = ''
 
     try:
         server = smtplib.SMTP(server_name, port)
@@ -37,4 +37,4 @@ def send_email(email, body, subject):
 
 def send_all():
     for i in EMAILS:
-        send_email(EMAILS[i][0], TEMPLATE)
+        send_email(EMAILS[i][0], TEMPLATE, 'Regular subscriber newsletter')
