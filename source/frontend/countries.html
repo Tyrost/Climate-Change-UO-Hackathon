@@ -108,6 +108,22 @@ polygonSeries.mapPolygons.template.on("active", function (active, target) {
       }
       if (target.get("active")) {
         countryName = target.dataItem.dataContext.name; // Access the name directly
+        
+        fetch('', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ country: countryName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Optional: Log the response from PHP
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
         polygonSeries.zoomToDataItem(target.dataItem);
         //console.log("Clicked on", target.get("tooltipText"));
       }
