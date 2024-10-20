@@ -1,4 +1,4 @@
-import mysql.connector  # or import pymysql
+import pymysql  # or import pymysql
 
 # Database connection details
 config = {
@@ -10,7 +10,7 @@ config = {
 
 try:
     # Establish the database connection
-    connection = mysql.connector.connect(**config)  # or pymysql.connect(**config)
+    connection = pymysql.connector.connect(**config)  # or pymysql.connect(**config)
 
     # Create a cursor object
     cursor = connection.cursor()
@@ -24,7 +24,7 @@ try:
     # Fetch all results from the executed query
     subscribers = cursor.fetchall()
 
-except mysql.connector.Error as err:
+except pymysql.connector.Error as err:
     print(f"Error: {err}")
 
 finally:
